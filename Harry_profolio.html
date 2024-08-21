@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harry Profile - Dr. Hari Mohan Rai</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        nav {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #444;
+        }
+        nav a {
+            margin: 0 15px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        section {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        section h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .about, .skills, .projects, .contact {
+            margin-bottom: 40px;
+        }
+        .skills ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .skills ul li {
+            background-color: #e7e7e7;
+            margin: 5px 0;
+            padding: 10px;
+            font-size: 1.1em;
+        }
+        .projects .project {
+            margin-bottom: 20px;
+        }
+        .contact form {
+            display: flex;
+            flex-direction: column;
+        }
+        .contact label {
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        .contact input, .contact textarea {
+            padding: 10px;
+            font-size: 1em;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .contact input[type="submit"] {
+            background-color: #333;
+            color: #fff;
+            cursor: pointer;
+            border: none;
+        }
+        .contact input[type="submit"]:hover {
+            background-color: #555;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Harry Profile - Dr. Hari Mohan Rai</h1>
+</header>
+
+<nav>
+    <a href="#about">About Me</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+</nav>
+
+<section id="about" class="about">
+    <h2>About Me</h2>
+    <p>
+        Hello! I am Dr. Hari Mohan Rai, a dedicated professional with expertise in [Your Field of Expertise]. 
+        I have a passion for [Your Passion], and I am committed to [Your Mission/Goal]. 
+        With extensive experience in [Your Experience], I aim to contribute to [Your Contribution Goal].
+    </p>
+</section>
+
+<section id="skills" class="skills">
+    <h2>Skills</h2>
+    <ul>
+        <li>Skill 1</li>
+        <li>Skill 2</li>
+        <li>Skill 3</li>
+        <li>Skill 4</li>
+    </ul>
+</section>
+
+<section id="projects" class="projects">
+    <h2>Projects</h2>
+    <div class="project">
+        <h3>Project 1</h3>
+        <p>Description of Project 1.</p>
+    </div>
+    <div class="project">
+        <h3>Project 2</h3>
+        <p>Description of Project 2.</p>
+    </div>
+    <div class="project">
+        <h3>Project 3</h3>
+        <p>Description of Project 3.</p>
+    </div>
+</section>
+
+<section id="contact" class="contact">
+    <h2>Contact</h2>
+    <form action="submit_form.php" method="post">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
+        
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+        
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+        
+        <input type="submit" value="Send Message">
+    </form>
+</section>
+
+<footer>
+    <p>&copy; 2024 Dr. Hari Mohan Rai. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
