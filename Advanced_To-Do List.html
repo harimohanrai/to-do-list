@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            max-width: 400px;
+            width: 100%;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        ul li {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        ul li.done {
+            text-decoration: line-through;
+            color: #888;
+        }
+        .buttons {
+            display: flex;
+            gap: 5px;
+        }
+        button {
+            padding: 5px 10px;
+            border: none;
+            background-color: #333;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button.edit {
+            background-color: #008cba;
+        }
+        button.delete {
+            background-color: #e74c3c;
+        }
+        button:hover {
+            opacity: 0.8;
+        }
+        .clear-all {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            width: 100%;
+            margin-top: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .clear-all:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Advanced To-Do List</h1>
+    <input type="text" id="taskInput" placeholder="Add a new task...">
+    <ul id="taskList"></ul>
+    <button class="clear-all" onclick="clearAllTasks()">Clear All</button>
+</div>
+
+<script>
+    const taskInput = document.getElementById('taskInput');
+    const taskList = document.getElementById('taskList');
+
+    document.addEventListener('DOMContentLoaded', loadTasks);
+    taskInput.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            addTask(taskInput.value);
+        }
+    });
+
+    function loadTasks() {
+        const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        tasks.forEach(task => {
+            renderTask(task.text, task.done);
+        });
+    }
+
+    function addTask(text) {
+        if (text.trim() === '') return;
+        renderTask(text);
+        saveTask(text);
+        taskInput.value = '';
+    }
+
+    function renderTask(text, done = false) {
+        const li = document.createElement('li');
+        if (done) li.classList.add('done');
+        li.innerHTML = `
+            <span contenteditable="true">${text}</span>
+            <div class="buttons">
+                <button class="edit" onclick="editTask(this)">Edit</button>
+                <button class="delete" onclick="deleteTask(this)">Delete</button>
+            </div>
+        `;
+        li.addEventListener('click', function(e) {
+            if (e.target.tagName !== 'BUTTON') {
+                li.classList.toggle('done');
+                toggleTaskDone(text);
+            }
+        });
+        taskList.appendChild(li);
+    }
+
+    function saveTask(text) {
+        const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        tasks.push({ text, done: false });
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+
+    function toggleTaskDone(text) {
+        const tasks = JSON.parse(localStorage.getItem('tasks'));
+        const task = tasks.find(t => t.text === text);
+        task.done = !task.done;
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+
+    function editTask(button) {
+        const li = button.closest('li');
+        const newText = li.querySelector('span').textContent;
+        const tasks = JSON.parse(localStorage.getItem('tasks'));
+        const task = tasks.find(t => t.text === newText);
+        task.text = newText;
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+
+    function deleteTask(button) {
+        const li = button.closest('li');
+        const text = li.querySelector('span').textContent;
+        const tasks = JSON.parse(localStorage.getItem('tasks'));
+        const newTasks = tasks.filter(task => task.text !== text);
+        localStorage.setItem('tasks', JSON.stringify(newTasks));
+        taskList.removeChild(li);
+    }
+
+    function clearAllTasks() {
+        localStorage.removeItem('tasks');
+        taskList.innerHTML = '';
+    }
+</script>
+
+</body>
+</html>
